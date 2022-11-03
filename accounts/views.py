@@ -106,7 +106,7 @@ def home(request):
 	return render(request, 'accounts/dashboard.html', context)
 
 @login_required(login_url='login')
-@allowed_users(allowed_roles=['customer', 'admin'])
+# @allowed_users(allowed_roles=['customer', 'admin'])
 def accountSettings(request):
 	customer = request.user.customer
 	form = CustomerForm(instance=customer)
@@ -121,7 +121,7 @@ def accountSettings(request):
 	return render(request, 'accounts/account_settings.html', context)
 
 @login_required(login_url='login')
-@allowed_users(allowed_roles=['admin'])
+# @allowed_users(allowed_roles=['admin'])
 def detail_view(request, pk):
 	name = Customer.objects.get(id=pk)
 	employee = Attendance.objects.filter(attender=name)
@@ -132,7 +132,7 @@ def detail_view(request, pk):
 	return render(request, 'accounts/detail_view.html', context)
 
 @login_required(login_url='login')
-@allowed_users(allowed_roles=['admin'])
+# @allowed_users(allowed_roles=['admin'])
 def delete_emp(request, pk):
 	employee = Customer.objects.get(id=pk)
 	user = User.objects.get(username=employee)
@@ -149,7 +149,7 @@ def delete_emp(request, pk):
 # clockin & clockout
 
 @login_required(login_url='login')
-@allowed_users(allowed_roles=['customer', 'admin'])
+# @allowed_users(allowed_roles=['customer', 'admin'])
 def clockin_clockout(request):
 	if request.method == 'POST':
 		if 'btnform1' in request.POST:
@@ -176,16 +176,16 @@ def clockin_clockout(request):
 	return render(request, 'accounts/attendance.html', context)
 
 @login_required(login_url='login')
-@allowed_users(allowed_roles=['customer', 'admin'])
+# @allowed_users(allowed_roles=['customer', 'admin'])
 def DownloadPdf(request):
-    with open(os.path.join(settings.MEDIA_ROOT, 'Invoice_Template.pdf'), 'rb') as fh:
+    with open(os.path.join(settings.MEDIA_ROOT, 'Leave Management policies.pdf'), 'rb') as fh:
     	response = HttpResponse(fh.read(), content_type="application/pdf")
     	response['Content-Disposition'] = 'inline; filename=invoice.pdf'
     	return response
 
 
 @login_required(login_url='login')
-@allowed_users(allowed_roles=['customer', 'admin'])
+# @allowed_users(allowed_roles=['customer', 'admin'])
 def leave_application(request):
 	
 	form = leaveform(request.POST)
