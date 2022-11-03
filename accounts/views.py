@@ -108,7 +108,7 @@ def home(request):
 @login_required(login_url='login')
 # @allowed_users(allowed_roles=['customer', 'admin'])
 def accountSettings(request):
-	customer = request.user.customer
+	customer = request.user
 	form = CustomerForm(instance=customer)
 
 	if request.method == 'POST':
