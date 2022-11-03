@@ -43,8 +43,8 @@
 						<td>{{emp.date|date:"l"}}</td>
 						<td>{{emp.attender}}</td>
 						<td>{{emp.is_present|yesno:"✔,✘" }}</td>
-						<td>{{emp.clockin}}</td>
-						<td>{{emp.clockout}}</td>
+						<td>{{emp.clockin.time}}</td>
+						<td>{{emp.clockout.time}}</td>
 					</tr>
 						
 				{% endfor %}
