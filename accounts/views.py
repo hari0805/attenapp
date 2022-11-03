@@ -178,7 +178,7 @@ def clockin_clockout(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['customer', 'admin'])
 def DownloadPdf(request):
-    with open(os.path.join(settings.MEDIA_ROOT, 'Leave Management policies.pdf'), 'rb') as fh:
+    with open(os.path.join(settings.MEDIA_ROOT, 'Invoice_Template.pdf'), 'rb') as fh:
     	response = HttpResponse(fh.read(), content_type="application/pdf")
     	response['Content-Disposition'] = 'inline; filename=invoice.pdf'
     	return response
