@@ -33,6 +33,8 @@
 					<th>Day</th>
 					<th>Name</th>
 					<th>Present</th>
+					<th>Clock-IN</th>
+					<th>Clock-OUT</th>
 				</tr>
 
 				{% for emp in filter.qs %}
@@ -41,7 +43,8 @@
 						<td>{{emp.date|date:"l"}}</td>
 						<td>{{emp.attender}}</td>
 						<td>{{emp.is_present|yesno:"✔,✘" }}</td>
-						<!-- <td>{{emp.attender}}</td> -->
+						<td>{{emp.clockin}}</td>
+						<td>{{emp.clockout}}</td>
 					</tr>
 						
 				{% endfor %}
