@@ -66,7 +66,7 @@ def logoutUser(request):
 	return redirect('login')
 
 @login_required(login_url='login')
-@admin_only
+# @admin_only
 def home(request):
 
 	if request.method == 'POST':
