@@ -165,7 +165,7 @@ def clockin_clockout(request):
 		elif 'btnform2' in request.POST:
 			if not Attendance.objects.filter(attender=str(request.user),date = datetime.utcnow()  + datetime.timedelta(hours=5, minutes=30), clockin__isnull=False).exists():
 				messages.error(request, 'You must clockin to clockout')
-			elif not Attendance.objects.filter(attender=str(request.user),date = datetime.utcnow() =  + datetime.timedelta(hours=5, minutes=30), clockout__isnull=False).exists():
+			elif not Attendance.objects.filter(attender=str(request.user),date = datetime.utcnow() + datetime.timedelta(hours=5, minutes=30), clockout__isnull=False).exists():
 				clockout_model = Attendance.objects.select_related().filter(attender = str(request.user), date = date.today()).update(clockout = datetime.now())
 				messages.success(request, 'You have Clocked out today')
 			else:
