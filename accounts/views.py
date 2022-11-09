@@ -153,9 +153,9 @@ def delete_emp(request, pk):
 def clockin_clockout(request):
 	if request.method == 'POST':
 		if 'btnform1' in request.POST:
-			if Attendance.objects.filter(attender=str(request.user), date = datetime.now(), is_present = False).exists():
+			if Attendance.objects.filter(attender=str(request.user), date = datetime.now(timezone("Asia/Kolkata")), is_present = False).exists():
 				messages.error(request, "You are marked as absent by admin today, you can't clock-in")
-			elif not Attendance.objects.filter(attender=str(request.user),date = datetime.now(), clockin__isnull=False).exists():
+			elif not Attendance.objects.filter(attender=str(request.user),date = datetime.now(timezone("Asia/Kolkata")), clockin__isnull=False).exists():
 				clockin_model = Attendance.objects.create(attender = str(request.user), date = datetime.now(), clockin = datetime.now(), is_present = True)
 				clockin_model.save()
 				messages.success(request, 'You have Clocked In today')
@@ -163,9 +163,9 @@ def clockin_clockout(request):
 				messages.info(request, 'You can Clock In once a day')
 
 		elif 'btnform2' in request.POST:
-			if not Attendance.objects.filter(attender=str(request.user),date = datetime.now(), clockin__isnull=False).exists():
+			if not Attendance.objects.filter(attender=str(request.user),date = datetime.now(timezone("Asia/Kolkata")), clockin__isnull=False).exists():
 				messages.error(request, 'You must clockin to clockout')
-			elif not Attendance.objects.filter(attender=str(request.user),date = datetime.now(), clockout__isnull=False).exists():
+			elif not Attendance.objects.filter(attender=str(request.user),date = datetime.now(timezone("Asia/Kolkata")), clockout__isnull=False).exists():
 				clockout_model = Attendance.objects.select_related().filter(attender = str(request.user), date = date.today()).update(clockout = datetime.now())
 				messages.success(request, 'You have Clocked out today')
 			else:
