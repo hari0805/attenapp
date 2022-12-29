@@ -156,7 +156,7 @@ def clockin_clockout(request):
 			if Attendance.objects.filter(attender=str(request.user), date = datetime.now(timezone("Asia/Kolkatta")), is_present = False).exists():
 				messages.error(request, "You are marked as absent by admin today, you can't clock-in")
 			elif not Attendance.objects.filter(attender=str(request.user),date = datetime.now(timezone("Asia/Kolkatta")), clockin__isnull=False).exists():
-				clockin_model = Attendance.objects.create(attender = str(request.user), date = datetime.now(timezone("Asia/Kolkatta")), clockin = datetime.now(), is_present = True)
+				clockin_model = Attendance.objects.create(attender = str(request.user), date = datetime.now(timezone("Asia/Kolkatta")), clockin = datetime.now(timezone("Asia/Kolkatta")), is_present = True)
 				clockin_model.save()
 				messages.success(request, 'You have Clocked In today')
 			else:
@@ -166,7 +166,7 @@ def clockin_clockout(request):
 			if not Attendance.objects.filter(attender=str(request.user),date = datetime.now(timezone("Asia/Kolkatta")), clockin__isnull=False).exists():
 				messages.error(request, 'You must clockin to clockout')
 			elif not Attendance.objects.filter(attender=str(request.user),date = datetime.now(timezone("Asia/Kolkatta")), clockout__isnull=False).exists():
-				clockout_model = Attendance.objects.select_related().filter(attender = str(request.user), date = date.today()).update(clockout = datetime.now())
+				clockout_model = Attendance.objects.select_related().filter(attender = str(request.user), date = date.today(timezone("Asia/Kolkatta"))).update(clockout = datetime.now())
 				messages.success(request, 'You have Clocked out today')
 			else:
 				messages.info(request, 'You can Clock out once a day')
